@@ -12,12 +12,23 @@ async function getOnusVndcPrice() {
   const lastTrade = trades?.[0];
   return lastTrade?.p || "Không có dữ liệu";
 }
-
+const basePriceBuy = 22080;
+const buyVal = 10200000;
+function formatVND(amount) {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    maximumFractionDigits: 0 // bỏ phần lẻ
+  }).format(amount);
+}
 // Khi người dùng gõ /get
 bot.command("get", async (ctx) => {
   try {
     const price = await getOnusVndcPrice();
-    await ctx.reply(`💰 Giá ONUS/VNDC hiện tại: ${price}`);
+
+    await ctx.reply(`💰 Giá ONUS/VNDC hiện tại: ${formatVND(price)}\n💰 Giá ONUS/VNDC ban đầu: ${formatVND(basePriceBuy)}
+      \nLợi nhuận%: ${((price - basePriceBuy) / basePriceBuy * 100).toFixed(2)}%\nVốn ban đầu: ${formatVND(buyVal)}VND\n💰 Giá ONUS/VNDC ban đầu: ${formatVND(basePriceBuy)}
+      \nLợi nhuận : ${formatVND(Math.round((price - basePriceBuy) / basePriceBuy * buyVal))}`);
   } catch (err) {
     console.error(err);
     await ctx.reply("⚠️ Lỗi khi lấy dữ liệu giá.");
