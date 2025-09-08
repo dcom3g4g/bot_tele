@@ -1,14 +1,30 @@
-// main.js
 import fs from 'fs';
 import express from 'express';
-import { CheerioCrawler, RequestQueue } from '@crawlee/cheerio';
 import TelegramBot from 'node-telegram-bot-api';
+import { CheerioCrawler, RequestQueue } from '@crawlee/cheerio';
 
-const TELEGRAM_TOKEN = "8338138355:AAFB-8MA-Duv2lY_sbUJB75ZJ5dEVMw0lcU"; // thay bằng token của bạn
-if (!TELEGRAM_TOKEN) throw new Error('TELEGRAM_TOKEN is not set!');
-
-const bot = new TelegramBot(TELEGRAM_TOKEN);
+// --- Environment variables ---
+const TELEGRAM_TOKEN = "8338138355:AAFB-8MA-Duv2lY_sbUJB75ZJ5dEVMw0lcU"; // replace with your token
+const BASE_URL = "https://bottele-production-601b.up.railway.app"; // e.g., Railway public URL: https://your-app.up.railway.app
 const DATA_FILE = 'data.txt';
+
+if (!TELEGRAM_TOKEN || !BASE_URL) {
+    console.error("Please set TELEGRAM_TOKEN and BASE_URL in your environment variables.");
+    process.exit(1);
+}
+
+// --- Initialize Telegram bot without polling ---
+const bot = new TelegramBot(TELEGRAM_TOKEN);
+const webhookUrl = `${BASE_URL}/bot${TELEGRAM_TOKEN}`;
+await bot.setWebHook(webhookUrl);
+
+// --- Express server ---
+const app = express();
+app.use(express.json());
+app.post(`/bot${TELEGRAM_TOKEN}`, (req, res) => {
+    bot.processUpdate(req.body);
+    res.sendStatus(200);
+});
 
 // --- Load stock list ---
 function loadStocks() {
@@ -17,7 +33,6 @@ function loadStocks() {
         .split(/\r?\n/)
         .map(l => l.trim())
         .filter(Boolean);
-
     const stocks = [];
     for (let i = 0; i < lines.length; i += 3) {
         stocks.push({
@@ -32,9 +47,7 @@ function loadStocks() {
 // --- Save stock list ---
 function saveStocks(stocks) {
     const lines = [];
-    for (const s of stocks) {
-        lines.push(s.code, s.url, String(s.basePrice || ''));
-    }
+    for (const s of stocks) lines.push(s.code, s.url, String(s.basePrice || ''));
     fs.writeFileSync(DATA_FILE, lines.join('\n'), 'utf-8');
 }
 
@@ -42,7 +55,6 @@ function saveStocks(stocks) {
 async function crawlStocks(targetCodes = null) {
     const stocks = loadStocks();
     const results = [];
-
     const requestQueue = await RequestQueue.open('local-stock-queue');
 
     for (const stock of stocks) {
@@ -75,7 +87,6 @@ async function crawlStocks(targetCodes = null) {
                     data.diffPct = diffPct + '%';
                 }
             }
-
             results.push(data);
         },
     });
@@ -84,20 +95,16 @@ async function crawlStocks(targetCodes = null) {
     return results;
 }
 
-// --- Telegram Commands ---
+// --- Telegram commands ---
+
 // /get <code>
 bot.onText(/\/get (.+)/, async (msg, match) => {
     const chatId = msg.chat.id;
     const code = match[1].trim().toUpperCase();
-
     bot.sendMessage(chatId, `🔍 Lấy dữ liệu cho ${code}...`);
-
     try {
         const results = await crawlStocks([code]);
-        if (!results.length) {
-            bot.sendMessage(chatId, `❌ Không tìm thấy dữ liệu cho ${code}`);
-            return;
-        }
+        if (!results.length) return bot.sendMessage(chatId, `❌ Không tìm thấy dữ liệu cho ${code}`);
         const s = results[0];
         bot.sendMessage(chatId,
             `📊 ${s.symbol} - ${s.company}\n` +
@@ -115,13 +122,9 @@ bot.onText(/\/get (.+)/, async (msg, match) => {
 bot.onText(/\/getall/, async (msg) => {
     const chatId = msg.chat.id;
     bot.sendMessage(chatId, '🔍 Lấy dữ liệu tất cả mã...');
-
     try {
         let results = await crawlStocks();
-        if (!results.length) {
-            bot.sendMessage(chatId, '⚠️ Không có dữ liệu.');
-            return;
-        }
+        if (!results.length) return bot.sendMessage(chatId, '⚠️ Không có dữ liệu.');
 
         results.sort((a, b) => {
             const aVal = parseFloat((a.change || '0').replace('%', '').replace('+', '')) || 0;
@@ -162,10 +165,7 @@ bot.onText(/\/getall/, async (msg) => {
 bot.onText(/\/add (.+)/, (msg, match) => {
     const chatId = msg.chat.id;
     const parts = match[1].split(' ').map(p => p.trim()).filter(Boolean);
-    if (parts.length < 3) {
-        bot.sendMessage(chatId, '❌ Sai cú pháp. Dùng: /add CODE URL BASEPRICE');
-        return;
-    }
+    if (parts.length < 3) return bot.sendMessage(chatId, '❌ Sai cú pháp. Dùng: /add CODE URL BASEPRICE');
 
     const code = parts[0].toUpperCase();
     const url = parts[1];
@@ -187,31 +187,15 @@ bot.onText(/\/add (.+)/, (msg, match) => {
 bot.onText(/\/remove (.+)/, (msg, match) => {
     const chatId = msg.chat.id;
     const code = match[1].trim().toUpperCase();
+
     let stocks = loadStocks();
     const newStocks = stocks.filter(s => s.code.toUpperCase() !== code);
-    if (newStocks.length === stocks.length) {
-        bot.sendMessage(chatId, `❌ Không tìm thấy stock ${code}`);
-        return;
-    }
+    if (newStocks.length === stocks.length) return bot.sendMessage(chatId, `❌ Không tìm thấy stock ${code}`);
+
     saveStocks(newStocks);
     bot.sendMessage(chatId, `🗑 Đã xoá stock ${code}`);
 });
 
-// --- EXPRESS WEBHOOK SETUP ---
-const app = express();
-app.use(express.json());
-
-// Telegram webhook path
-const webhookPath = `/bot${TELEGRAM_TOKEN}`;
-bot.setWebHook(`${process.env.RAILWAY_STATIC_URL}${webhookPath}`);
-
-// Endpoint for Telegram updates
-app.post(webhookPath, (req, res) => {
-    bot.processUpdate(req.body);
-    res.sendStatus(200);
-});
-
-// Start Express server
+// --- Start Express server ---
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-console.log('🤖 Bot is running...');
+app.listen(PORT, () => console.log(`🤖 Bot running with webhook at ${webhookUrl}`));
