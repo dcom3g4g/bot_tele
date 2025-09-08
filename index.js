@@ -1,48 +1,47 @@
-import Apify from 'apify';
 import fs from 'fs';
+import Apify from 'apify';
 import TelegramBot from 'node-telegram-bot-api';
+import { CheerioCrawler, RequestQueue } from '@crawlee/cheerio';
 
-const { CheerioCrawler } = Apify;
-const log = Apify.utils.log;
 
+// Telegram bot token
 const TELEGRAM_TOKEN = "8338138355:AAFB-8MA-Duv2lY_sbUJB75ZJ5dEVMw0lcU";
 const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: true });
 
 const DATA_FILE = 'data.txt';
 
-// --- đọc danh sách stock từ file ---
+// --- Load stock list ---
 function loadStocks() {
   if (!fs.existsSync(DATA_FILE)) return [];
-  const fileContent = fs.readFileSync(DATA_FILE, 'utf-8');
-  const lines = fileContent.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-
+  const lines = fs.readFileSync(DATA_FILE, 'utf-8').split(/\r?\n/).map(l => l.trim()).filter(Boolean);
   const stocks = [];
   for (let i = 0; i < lines.length; i += 3) {
-    const code = lines[i];
-    const url = lines[i + 1];
-    const basePrice = parseFloat(lines[i + 2].replace(/,/g, '')) || null;
-    stocks.push({ code, url, basePrice });
+    stocks.push({
+      code: lines[i],
+      url: lines[i + 1],
+      basePrice: parseFloat(lines[i + 2].replace(/,/g, '')) || null,
+    });
   }
   return stocks;
 }
 
-// --- ghi danh sách stock xuống file ---
+// --- Save stock list ---
 function saveStocks(stocks) {
   const lines = [];
   for (const s of stocks) {
-    lines.push(s.code);
-    lines.push(s.url);
-    lines.push(String(s.basePrice || ''));
+    lines.push(s.code, s.url, String(s.basePrice || ''));
   }
   fs.writeFileSync(DATA_FILE, lines.join('\n'), 'utf-8');
 }
 
-// --- crawl dữ liệu ---
+// --- Crawl stocks ---
 async function crawlStocks(targetCodes = null) {
   const stocks = loadStocks();
   const results = [];
 
-  const requestQueue = await Apify.openRequestQueue();
+  // Open a local request queue
+  const requestQueue = await RequestQueue.open('local-stock-queue');
+
   for (const stock of stocks) {
     if (!targetCodes || targetCodes.includes(stock.code.toUpperCase())) {
       await requestQueue.addRequest({
@@ -62,13 +61,13 @@ async function crawlStocks(targetCodes = null) {
       data.symbol = $('span.stock-code').text().trim() || stock.code || 'N/A';
       data.company = $('h1.title').text().trim() || 'N/A';
       data.price = $('.stock-info .price').first().text().trim() || 'N/A';
-      data.change = $('#stockchange').text().trim() === '' ? 0 : $('#stockchange').text().trim();
+      data.change = $('#stockchange').text().trim() || '0';
 
       if (stock.basePrice) {
         const current = parseFloat(data.price.replace(/,/g, '')) || null;
         if (current) {
           const diff = current - stock.basePrice;
-          const diffPct = ((diff / stock.basePrice) * 100).toFixed(2) || 0;
+          const diffPct = ((diff / stock.basePrice) * 100).toFixed(2);
           data.basePrice = stock.basePrice;
           data.diff = diff;
           data.diffPct = diffPct + '%';
@@ -83,113 +82,86 @@ async function crawlStocks(targetCodes = null) {
   return results;
 }
 
-// --- Telegram Commands ---
+// --- Telegram commands ---
+
 // /get <code>
 bot.onText(/\/get (.+)/, async (msg, match) => {
   const chatId = msg.chat.id;
   const code = match[1].trim().toUpperCase();
 
-  bot.sendMessage(chatId, `🔍 Đang lấy dữ liệu cho ${code} ...`);
+  bot.sendMessage(chatId, `🔍 Lấy dữ liệu cho ${code}...`);
 
   try {
     const results = await crawlStocks([code]);
-    if (results.length === 0) {
-      bot.sendMessage(chatId, `❌ Không tìm thấy dữ liệu cho mã: ${code}`);
+    if (!results.length) {
+      bot.sendMessage(chatId, `❌ Không tìm thấy dữ liệu cho ${code}`);
       return;
     }
 
     const s = results[0];
-    {
-      bot.sendMessage(chatId,
-        `📊 ${s.symbol} - ${s.company}\n` +
-        `💰 Giá: ${s.price}\n` +
-        `📈 Change: ${s.change}\n` +
-        (s.basePrice ?
-          `🔹 Base: ${s.basePrice}\n🔺 Diff: ${s.diff} (${s.diffPct})`
-          : '')
-      );
-    }
-
+    bot.sendMessage(chatId,
+      `📊 ${s.symbol} - ${s.company}\n` +
+      `💰 Giá: ${s.price}\n` +
+      `📈 Change: ${s.change}\n` +
+      (s.basePrice ? `🔹 Base: ${s.basePrice}\n🔺 Diff: ${s.diff} (${s.diffPct})` : '')
+    );
   } catch (err) {
-    log.error(err);
-    bot.sendMessage(chatId, '⚠️ Có lỗi khi lấy dữ liệu.');
+    console.error(err);
+    bot.sendMessage(chatId, '⚠️ Lỗi khi lấy dữ liệu.');
   }
 });
 
-// /get all
+// /getall
 bot.onText(/\/getall/, async (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, '🔍 Đang lấy dữ liệu tất cả mã...');
+  bot.sendMessage(chatId, '🔍 Lấy dữ liệu tất cả mã...');
 
   try {
     let results = await crawlStocks();
-    if (results.length === 0) {
+    if (!results.length) {
       bot.sendMessage(chatId, '⚠️ Không có dữ liệu.');
       return;
     }
 
-    // --- sort theo Change giảm dần ---
     results.sort((a, b) => {
       const aVal = parseFloat((a.change || '0').replace('%', '').replace('+', '')) || 0;
       const bVal = parseFloat((b.change || '0').replace('%', '').replace('+', '')) || 0;
-      return bVal - aVal; // giảm dần
+      return bVal - aVal;
     });
 
-    // Đặt độ rộng cột
-    const colWidths = {
-      symbol: 7,
-      price: 10,
-      change: 8,
-      base: 10,
-      diff: 15
-    };
-
-    // Header
+    const colWidths = { symbol: 7, price: 10, change: 8, base: 10, diff: 15 };
     let message = '```\n';
-    message +=
-      'Symbol'.padEnd(colWidths.symbol, ' ') +
-      'Price'.padStart(colWidths.price, ' ') +
-      'Change'.padEnd(colWidths.change, ' ') +
-      'Base'.padStart(colWidths.base, ' ') +
-      'Diff(Diff%)'.padStart(colWidths.diff, ' ') +
-      '\n';
-    message += '-'.repeat(colWidths.symbol + colWidths.price + colWidths.change + colWidths.base + colWidths.diff) + '\n';
+    message += 'Symbol'.padEnd(colWidths.symbol) +
+      'Price'.padStart(colWidths.price) +
+      'Change'.padEnd(colWidths.change) +
+      'Base'.padStart(colWidths.base) +
+      'Diff(Diff%)'.padStart(colWidths.diff) + '\n';
+    message += '-'.repeat(Object.values(colWidths).reduce((a, b) => a + b, 0)) + '\n';
 
-    // Duyệt từng stock
     for (const s of results) {
-      const symbol = s.symbol.padEnd(colWidths.symbol, ' ');
-      const price = s.price.padStart(colWidths.price, ' ');
-
-      // Change + emoji
-      let changeVal = s.change || '0%';
-      let changeEmoji = '';
-      if (changeVal.includes('+')) changeEmoji = '📈';
-      else if (changeVal.includes('-')) changeEmoji = '📉';
-      const change = (changeVal + changeEmoji).padEnd(colWidths.change, ' ');
-
-      const base = s.basePrice ? String(s.basePrice).padStart(colWidths.base, ' ') : '-'.padStart(colWidths.base, ' ');
-      const diff = s.diff ? `${s.diff} (${s.diffPct})`.padStart(colWidths.diff, ' ') : '-'.padStart(colWidths.diff, ' ');
-
+      const symbol = s.symbol.padEnd(colWidths.symbol);
+      const price = s.price.padStart(colWidths.price);
+      const changeVal = s.change || '0%';
+      const changeEmoji = changeVal.includes('+') ? '📈' : changeVal.includes('-') ? '📉' : '';
+      const change = (changeVal + changeEmoji).padEnd(colWidths.change);
+      const base = s.basePrice ? String(s.basePrice).padStart(colWidths.base) : '-'.padStart(colWidths.base);
+      const diff = s.diff ? `${s.diff} (${s.diffPct})`.padStart(colWidths.diff) : '-'.padStart(colWidths.diff);
       message += `${symbol}${price}${change}${base}${diff}\n`;
     }
 
     message += '```';
-
     bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
 
   } catch (err) {
-    log.error(err);
-    bot.sendMessage(chatId, '⚠️ Có lỗi khi lấy dữ liệu.');
+    console.error(err);
+    bot.sendMessage(chatId, '⚠️ Lỗi khi lấy dữ liệu.');
   }
 });
-
-
 
 // /add <code> <url> <basePrice>
 bot.onText(/\/add (.+)/, (msg, match) => {
   const chatId = msg.chat.id;
   const parts = match[1].split(' ').map(p => p.trim()).filter(Boolean);
-
   if (parts.length < 3) {
     bot.sendMessage(chatId, '❌ Sai cú pháp. Dùng: /add CODE URL BASEPRICE');
     return;
@@ -230,4 +202,4 @@ bot.onText(/\/remove (.+)/, (msg, match) => {
   bot.sendMessage(chatId, `🗑 Đã xoá stock ${code}`);
 });
 
-console.log('🤖 Bot sẵn sàng. Gõ /get <Mã>, /get all, /add, /remove');
+console.log('🤖 Bot sẵn sàng. Gõ /get <Mã>, /getall, /add, /remove');
