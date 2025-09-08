@@ -1,9 +1,0 @@
-{
-  "url": "https://finance.vietstock.vn/SSI-ctcp-chung-khoan-ssi.htm",
-  "symbol": "N/A",
-  "company": "CTCP Chứng khoán SSI  (HOSE: SSI)",
-  "price": "41,000",
-  "change": "500 (+1.23%)",
-  "rawBlock": "<h2 class=\"text-bold no-m-t r1\" id=\"stockprice\"><span class=\"txt-green price\">41,000</span><span class=\"fa fa-arrow-up txt-green\"></span></h2><div id=\"stockchange\" class=\"r1\"><span class=\"txt-green\">500</span> <span class=\"txt-green\">(+1.23%)</span></div><div class=\"r2\"><div id=\"tradedate\">08/09/2025 10:05</div><small id=\"tradingstatus\"></small></div>",
-  "scrapedAt": "2025-09-08T03:05:29.146Z"
-}
