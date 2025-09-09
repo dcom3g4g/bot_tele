@@ -12,8 +12,8 @@ async function getOnusVndcPrice() {
   const lastTrade = trades?.[0];
   return lastTrade?.p || "Không có dữ liệu";
 }
-const basePriceBuy = 22080;
-const buyVal = 10200000;
+const basePriceBuy = 22055;
+const buyVal = 10500000;
 function formatVND(amount) {
   return new Intl.NumberFormat("vi-VN", {
     style: "currency",

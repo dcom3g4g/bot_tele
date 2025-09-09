@@ -15,11 +15,12 @@ function loadStocks() {
     if (!fs.existsSync(DATA_FILE)) return [];
     const lines = fs.readFileSync(DATA_FILE, 'utf-8').split(/\r?\n/).map(l => l.trim()).filter(Boolean);
     const stocks = [];
-    for (let i = 0; i < lines.length; i += 3) {
+    for (let i = 0; i < lines.length; i += 4) {
         stocks.push({
             code: lines[i],
             url: lines[i + 1],
             basePrice: parseFloat(lines[i + 2].replace(/,/g, '')) || null,
+            volume: parseFloat(lines[i + 3].replace(/,/g, '')) || null,
         });
     }
     return stocks;
@@ -62,7 +63,7 @@ async function crawlStocks(targetCodes = null) {
             data.company = $('h1.title').text().trim() || 'N/A';
             data.price = $('.stock-info .price').first().text().trim() || 'N/A';
             data.change = $('#stockchange').text().trim() || '0';
-
+            data.volume = stock.volume || null;
             if (stock.basePrice) {
                 const current = parseFloat(data.price.replace(/,/g, '')) || null;
                 if (current) {
@@ -152,14 +153,39 @@ bot.onText(/\/getall/, async (msg) => {
         }
 
         message += '```';
+        let totalProfit = 0;
+        let message1 = '📊 Kết quả lãi/lỗ từng mã:';
+        message + - message1;
+        for (const s of results) {
+            const price = parseFloat((s.price || '0').replace(/,/g, ''));
+            const base = s.basePrice || 0;
+            const volume = s.volume || 0;
+            const profit = volume * (price - base);
+            totalProfit += profit;
+
+            const label = profit >= 0 ? '🟢Lãi' : '🔴Lỗ';
+            message += `\n${s.symbol}   ${label}: ${formatNumber(Math.abs(profit))}`;
+        }
+
+        // Thêm tổng lãi/lỗ
+        const totalLabel = totalProfit >= 0 ? '🟢Tổng Lãi' : '🔴Tổng Lỗ';
+        message += `\n------------------------`;
+        message += `\n${totalLabel}: ${formatNumber(Math.abs(totalProfit))}`;
+
         bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
+
 
     } catch (err) {
         console.error(err);
         bot.sendMessage(chatId, '⚠️ Lỗi khi lấy dữ liệu.');
     }
 });
-
+function formatNumber(num) {
+    if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(2) + 'B';
+    if (num >= 1_000_000) return (num / 1_000_000).toFixed(2) + 'M';
+    if (num >= 1_000) return (num / 1_000).toFixed(2) + 'K';
+    return num.toFixed(2);
+}
 // /add <code> <url> <basePrice>
 bot.onText(/\/add (.+)/, (msg, match) => {
     const chatId = msg.chat.id;
@@ -203,5 +229,79 @@ bot.onText(/\/remove (.+)/, (msg, match) => {
     saveStocks(newStocks);
     bot.sendMessage(chatId, `🗑 Đã xoá stock ${code}`);
 });
+// --- Giá vốn ---
+const basePriceBuy = 22055;
+const buyVal = 10500000;
+async function getOnusVndcPrice() {
+    const url = "https://spot-markets.goonus.io/trades?symbol_name=ONUS_VNDC";
+    const res = await fetch(url, { headers: { accept: "application/json" } });
+    const trades = await res.json();
+    const lastTrade = trades?.[0];
+    return lastTrade?.p || null;
+}
+async function getVndcPrice(coin) {
+    const url = "https://spot-markets.goonus.io/trades?symbol_name=" + coin + "_VNDC";
+    const res = await fetch(url, { headers: { accept: "application/json" } });
+    const trades = await res.json();
+    const lastTrade = trades?.[0];
+    return lastTrade?.p || null;
+}
+// --- Hàm format tiền VND ---
+function formatVND(amount) {
+    return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+        maximumFractionDigits: 0
+    }).format(amount);
+}
 
+// --- Lệnh /get ---
+bot.onText(/\/gcoin/, async (msg) => {
+    const chatId = msg.chat.id;
+
+    try {
+        const price = await getOnusVndcPrice();
+
+        if (!price) {
+            return bot.sendMessage(chatId, "⚠️ Không có dữ liệu.");
+        }
+
+        const profitPercent = ((price - basePriceBuy) / basePriceBuy * 100).toFixed(2);
+        const profitValue = Math.round((price - basePriceBuy) / basePriceBuy * buyVal);
+
+        const message =
+            `💰 Giá ONUS/VNDC hiện tại: ${formatVND(price)}\n` +
+            `💰 Giá ONUS/VNDC ban đầu: ${formatVND(basePriceBuy)}\n` +
+            `📈 Lợi nhuận%: ${profitPercent}%\n` +
+            `💵 Vốn ban đầu: ${formatVND(buyVal)}\n` +
+            `💹 Lợi nhuận: ${formatVND(profitValue)}`;
+
+        bot.sendMessage(chatId, message);
+
+    } catch (err) {
+        console.error(err);
+        bot.sendMessage(chatId, "⚠️ Lỗi khi lấy dữ liệu giá.");
+    }
+});
+bot.onText(/\/gv (.+)/, async (msg, match) => {
+    const chatId = msg.chat.id;
+    const code = match[1].trim().toUpperCase();
+
+    try {
+        const price = await getVndcPrice(code);
+
+        if (!price) {
+            return bot.sendMessage(chatId, "⚠️ Không có dữ liệu.");
+        }
+
+        const message =
+            `💰 Giá ${code}/VNDC hiện tại: ${formatVND(price)}`;
+
+        bot.sendMessage(chatId, message);
+
+    } catch (err) {
+        console.error(err);
+        bot.sendMessage(chatId, "⚠️ Lỗi khi lấy dữ liệu giá.");
+    }
+});
 console.log('🤖 Bot sẵn sàng. Gõ /get <Mã>, /getall, /add, /remove');

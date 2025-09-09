@@ -1,9 +1,0 @@
-{
-	"id": "SDNqDkm1rnJqnOu",
-	"json": "{\"id\":\"SDNqDkm1rnJqnOu\",\"url\":\"https://finance.vietstock.vn/SZC-ctcp-sonadezi-chau-duc.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/SZC-ctcp-sonadezi-chau-duc.htm\",\"uniqueKey\":\"SZC-1757326574361\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"SZC\",\"url\":\"https://finance.vietstock.vn/SZC-ctcp-sonadezi-chau-duc.htm\",\"basePrice\":33830},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-09-08T10:16:15.185Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "SZC-1757326574361",
-	"url": "https://finance.vietstock.vn/SZC-ctcp-sonadezi-chau-duc.htm"
-}

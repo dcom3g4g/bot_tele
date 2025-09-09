@@ -7,6 +7,11 @@
     "start": "node main.js ",
     "dev": "node index.js "
   },
+  "pkg": {
+    "assets": [
+      "data.txt"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
