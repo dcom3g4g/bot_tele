@@ -30,7 +30,7 @@ function loadStocks() {
 function saveStocks(stocks) {
     const lines = [];
     for (const s of stocks) {
-        lines.push(s.code, s.url, String(s.basePrice || ''));
+        lines.push(s.code, s.url, String(s.basePrice || ''), String(s.volume || ''));
     }
     fs.writeFileSync(DATA_FILE, lines.join('\n'), 'utf-8');
 }

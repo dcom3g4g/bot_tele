@@ -1,7 +1,3 @@
-SZC
-https://finance.vietstock.vn/SZC-ctcp-sonadezi-chau-duc.htm
-33830
-500
 CTR
 https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm
 88980
@@ -16,5 +12,5 @@ https://finance.vietstock.vn/BCM-tong-cong-ty-dau-tu-va-phat-trien-cong-nghiep-%
 300
 HAX
 https://finance.vietstock.vn/HAX-ctcp-dich-vu-o-to-hang-xanh.htm
-14060
-1000
+13650
+700
