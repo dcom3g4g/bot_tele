@@ -1,0 +1,9 @@
+{
+	"id": "movUfXBWO4xBNpw",
+	"json": "{\"id\":\"movUfXBWO4xBNpw\",\"url\":\"https://finance.vietstock.vn/\",\"loadedUrl\":\"https://finance.vietstock.vn/\",\"uniqueKey\":\"https://finance.vietstock.vn\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-09-12T10:51:24.366Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://finance.vietstock.vn",
+	"url": "https://finance.vietstock.vn/"
+}

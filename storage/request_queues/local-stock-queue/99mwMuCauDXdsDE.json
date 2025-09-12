@@ -1,0 +1,9 @@
+{
+	"id": "99mwMuCauDXdsDE",
+	"json": "{\"id\":\"99mwMuCauDXdsDE\",\"url\":\"https://finance.vietstock.vn/HAX-ctcp-dich-vu-o-to-hang-xanh.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/HAX-ctcp-dich-vu-o-to-hang-xanh.htm\",\"uniqueKey\":\"HAX-1757574421675\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"HAX\",\"url\":\"https://finance.vietstock.vn/HAX-ctcp-dich-vu-o-to-hang-xanh.htm\",\"basePrice\":13650,\"volume\":700},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-09-11T07:07:02.430Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "HAX-1757574421675",
+	"url": "https://finance.vietstock.vn/HAX-ctcp-dich-vu-o-to-hang-xanh.htm"
+}

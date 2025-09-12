@@ -83,6 +83,34 @@ async function crawlStocks(targetCodes = null) {
     return results;
 }
 
+
+async function crawlStocksVNI() {
+    const results = [];
+
+    // Open a local request queue
+    const requestQueue = await RequestQueue.open('local-stock-queue');
+
+    await requestQueue.addRequest({
+        url: 'https://finance.vietstock.vn/',
+    });
+
+    const crawler = new CheerioCrawler({
+        requestQueue,
+        handlePageFunction: async ({ $ }) => {
+            const data = {};
+            const vnIndexText = $('#vn-index b.pull-right').first().text().trim() || 'N/A';
+            data.vnIndexRaw = vnIndexText;
+            data.vnIndex = vnIndexText !== 'N/A' ? parseFloat(vnIndexText.replace(/,/g, '')) : null;
+
+            console.log('VNINDEX:', vnIndexText);
+            results.push(data);
+        },
+    });
+
+    await crawler.run();
+    return results;
+}
+
 // --- Telegram commands ---
 
 // /get <code>
@@ -112,6 +140,31 @@ bot.onText(/\/get (.+)/, async (msg, match) => {
     }
 });
 
+bot.onText(/\/gvni/, async (msg, match) => {
+    const chatId = msg.chat.id;
+    const code = 'VNINDEX';
+
+    bot.sendMessage(chatId, `🔍 Lấy dữ liệu cho ${code}...`);
+
+    try {
+        const results = await crawlStocksVNI([code]);
+        if (!results.length) {
+            bot.sendMessage(chatId, `❌ Không tìm thấy dữ liệu cho ${code}`);
+            return;
+        }
+
+        const s = results[0];
+        bot.sendMessage(chatId,
+            `📊 ${s.symbol} - ${s.company}\n` +
+            `💰 Giá: ${s.price}\n` +
+            `📈 Change: ${s.change}\n` +
+            (`🔹 Base: ${s.basePrice}\n🔺 Diff: ${s.diff} (${s.diffPct})`)
+        );
+    } catch (err) {
+        console.error(err);
+        bot.sendMessage(chatId, '⚠️ Lỗi khi lấy dữ liệu.');
+    }
+});
 // /getall
 bot.onText(/\/getall/, async (msg) => {
     const chatId = msg.chat.id;

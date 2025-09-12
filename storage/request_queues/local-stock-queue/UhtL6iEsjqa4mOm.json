@@ -1,0 +1,9 @@
+{
+	"id": "UhtL6iEsjqa4mOm",
+	"json": "{\"id\":\"UhtL6iEsjqa4mOm\",\"url\":\"https://finance.vietstock.vn/BCM-tong-cong-ty-dau-tu-va-phat-trien-cong-nghiep-%E2%80%93-ctcp.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/BCM-tong-cong-ty-dau-tu-va-phat-trien-cong-nghiep-%E2%80%93-ctcp.htm\",\"uniqueKey\":\"BCM-1757575225201\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"BCM\",\"url\":\"https://finance.vietstock.vn/BCM-tong-cong-ty-dau-tu-va-phat-trien-cong-nghiep-%E2%80%93-ctcp.htm\",\"basePrice\":69160,\"volume\":400},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-09-11T07:20:26.088Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "BCM-1757575225201",
+	"url": "https://finance.vietstock.vn/BCM-tong-cong-ty-dau-tu-va-phat-trien-cong-nghiep-%E2%80%93-ctcp.htm"
+}
