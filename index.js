@@ -283,10 +283,10 @@ bot.onText(/\/remove (.+)/, (msg, match) => {
     bot.sendMessage(chatId, `🗑 Đã xoá stock ${code}`);
 });
 // --- Giá vốn ---
-const basePriceBuy = 22055;
-const buyVal = 10500000;
+const basePriceBuy = 82000;
+const buyVal = 26500000;
 async function getOnusVndcPrice() {
-    const url = "https://spot-markets.goonus.io/trades?symbol_name=ONUS_VNDC";
+    const url = "https://spot-markets.goonus.io/trades?symbol_name=TON_VNDC";
     const res = await fetch(url, { headers: { accept: "application/json" } });
     const trades = await res.json();
     const lastTrade = trades?.[0];
@@ -294,6 +294,13 @@ async function getOnusVndcPrice() {
 }
 async function getVndcPrice(coin) {
     const url = "https://spot-markets.goonus.io/trades?symbol_name=" + coin + "_VNDC";
+    const res = await fetch(url, { headers: { accept: "application/json" } });
+    const trades = await res.json();
+    const lastTrade = trades?.[0];
+    return lastTrade?.p || null;
+}
+async function getUSDPrice(coin) {
+    const url = "https://spot-markets.goonus.io/trades?symbol_name=" + coin + "_USDT";
     const res = await fetch(url, { headers: { accept: "application/json" } });
     const trades = await res.json();
     const lastTrade = trades?.[0];
@@ -307,7 +314,24 @@ function formatVND(amount) {
         maximumFractionDigits: 0
     }).format(amount);
 }
+bot.onText(/\/clear/, async (msg) => {
+    const chatId = msg.chat.id;
 
+    try {
+        // Lấy tin nhắn gần đây (Telegram API không cho list toàn bộ đâu)
+        for (let i = msg.message_id; i > msg.message_id - 50; i--) {
+            try {
+                await bot.deleteMessage(chatId, i);
+            } catch (err) {
+                // bỏ qua lỗi nếu không xóa được
+            }
+        }
+
+        bot.sendMessage(chatId, "✅ Đã xóa 50 tin gần nhất (nếu bot có quyền).");
+    } catch (err) {
+        console.error(err);
+    }
+});
 // --- Lệnh /get ---
 bot.onText(/\/gcoin/, async (msg) => {
     const chatId = msg.chat.id;
@@ -323,8 +347,8 @@ bot.onText(/\/gcoin/, async (msg) => {
         const profitValue = Math.round((price - basePriceBuy) / basePriceBuy * buyVal);
 
         const message =
-            `💰 Giá ONUS/VNDC hiện tại: ${formatVND(price)}\n` +
-            `💰 Giá ONUS/VNDC ban đầu: ${formatVND(basePriceBuy)}\n` +
+            `💰 Giá TON/VNDC hiện tại: ${formatVND(price)}\n` +
+            `💰 Giá TON/VNDC ban đầu: ${formatVND(basePriceBuy)}\n` +
             `📈 Lợi nhuận%: ${profitPercent}%\n` +
             `💵 Vốn ban đầu: ${formatVND(buyVal)}\n` +
             `💹 Lợi nhuận: ${formatVND(profitValue)}`;
@@ -349,6 +373,27 @@ bot.onText(/\/gv (.+)/, async (msg, match) => {
 
         const message =
             `💰 Giá ${code}/VNDC hiện tại: ${formatVND(price)}`;
+
+        bot.sendMessage(chatId, message);
+
+    } catch (err) {
+        console.error(err);
+        bot.sendMessage(chatId, "⚠️ Lỗi khi lấy dữ liệu giá.");
+    }
+});
+bot.onText(/\/gu (.+)/, async (msg, match) => {
+    const chatId = msg.chat.id;
+    const code = match[1].trim().toUpperCase();
+
+    try {
+        const price = await getUSDPrice(code);
+
+        if (!price) {
+            return bot.sendMessage(chatId, "⚠️ Không có dữ liệu.");
+        }
+
+        const message =
+            `💰 Giá ${code}/USDC hiện tại: ${(price)}`;
 
         bot.sendMessage(chatId, message);
 

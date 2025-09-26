@@ -1,0 +1,9 @@
+{
+	"id": "7Sq4m6GBj9vPiJy",
+	"json": "{\"id\":\"7Sq4m6GBj9vPiJy\",\"url\":\"https://finance.vietstock.vn/PVD-tong-cong-ty-co-phan-khoan-va-dich-vu-khoan-dau-khi.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/PVD-tong-cong-ty-co-phan-khoan-va-dich-vu-khoan-dau-khi.htm\",\"uniqueKey\":\"PVD-1758094539944\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"PVD\",\"url\":\"https://finance.vietstock.vn/PVD-tong-cong-ty-co-phan-khoan-va-dich-vu-khoan-dau-khi.htm\",\"basePrice\":23820,\"volume\":500},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-09-17T07:35:40.641Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "PVD-1758094539944",
+	"url": "https://finance.vietstock.vn/PVD-tong-cong-ty-co-phan-khoan-va-dich-vu-khoan-dau-khi.htm"
+}

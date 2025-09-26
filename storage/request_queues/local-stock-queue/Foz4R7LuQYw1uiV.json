@@ -1,0 +1,9 @@
+{
+	"id": "Foz4R7LuQYw1uiV",
+	"json": "{\"id\":\"Foz4R7LuQYw1uiV\",\"url\":\"https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm\",\"uniqueKey\":\"CTR-1757903909403\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"CTR\",\"url\":\"https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm\",\"basePrice\":88330,\"volume\":400},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-09-15T02:38:30.190Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "CTR-1757903909403",
+	"url": "https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm"
+}

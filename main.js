@@ -1,40 +1,29 @@
-import { Telegraf } from "telegraf";
 import fetch from "node-fetch";
 
-const BOT_TOKEN = "8338138355:AAFB-8MA-Duv2lY_sbUJB75ZJ5dEVMw0lcU"; // thay bằng token của bạn
-const bot = new Telegraf(BOT_TOKEN);
+async function getVNIndex() {
+  const url = "https://finance.vietstock.vn/Data/GeneralMarket_GetMarketIndexVNData";
 
-// Hàm lấy giá ONUS/VNDC từ REST API
-async function getOnusVndcPrice() {
-  const url = "https://spot-markets.goonus.io/trades?symbol_name=ONUS_VNDC";
-  const res = await fetch(url, { headers: { accept: "application/json" } });
-  const trades = await res.json();
-  const lastTrade = trades?.[0];
-  return lastTrade?.p || "Không có dữ liệu";
-}
-const basePriceBuy = 22055;
-const buyVal = 10500000;
-function formatVND(amount) {
-  return new Intl.NumberFormat("vi-VN", {
-    style: "currency",
-    currency: "VND",
-    maximumFractionDigits: 0 // bỏ phần lẻ
-  }).format(amount);
-}
-// Khi người dùng gõ /get
-bot.command("get", async (ctx) => {
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Accept": "application/json, text/javascript, */*; q=0.01",
+      "Referer": "https://finance.vietstock.vn/",
+      "X-Requested-With": "XMLHttpRequest", // nhiều site .NET cần cái này
+    },
+  });
+
+  const text = await res.text();
+  console.log("Raw response:", text.slice(0, 200)); // in thử 200 ký tự đầu
+
   try {
-    const price = await getOnusVndcPrice();
-
-    await ctx.reply(`💰 Giá ONUS/VNDC hiện tại: ${formatVND(price)}\n💰 Giá ONUS/VNDC ban đầu: ${formatVND(basePriceBuy)}
-      \nLợi nhuận%: ${((price - basePriceBuy) / basePriceBuy * 100).toFixed(2)}%\nVốn ban đầu: ${formatVND(buyVal)}VND\n💰 Giá ONUS/VNDC ban đầu: ${formatVND(basePriceBuy)}
-      \nLợi nhuận : ${formatVND(Math.round((price - basePriceBuy) / basePriceBuy * buyVal))}`);
+    const json = JSON.parse(text);
+    console.log("📊 VNINDEX JSON:", json);
+    return json;
   } catch (err) {
-    console.error(err);
-    await ctx.reply("⚠️ Lỗi khi lấy dữ liệu giá.");
+    console.error("❌ Không parse được JSON:", err.message);
   }
-});
+}
 
-// Start bot
-bot.launch();
-console.log("🤖 Bot đang chạy...");
+getVNIndex();
