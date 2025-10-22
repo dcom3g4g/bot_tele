@@ -286,7 +286,7 @@ bot.onText(/\/remove (.+)/, (msg, match) => {
 const basePriceBuy = 82200;
 const buyVal = 10000000;
 async function getOnusVndcPrice() {
-    const url = "https://spot-markets.goonus.io/trades?symbol_name=TON_VNDC";
+    const url = "https://spot-markets.goonus.io/trades?symbol_name=TON_USDT";
     const res = await fetch(url, { headers: { accept: "application/json" } });
     const trades = await res.json();
     const lastTrade = trades?.[0];

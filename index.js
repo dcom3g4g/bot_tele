@@ -207,6 +207,8 @@ bot.onText(/\/getall/, async (msg) => {
 
         message += '```';
         let totalProfit = 0;
+        let totalBuy = 0;
+        let totalCurr = 0;
         let message1 = '📊 Kết quả lãi/lỗ từng mã:';
         message + - message1;
         for (const s of results) {
@@ -214,16 +216,20 @@ bot.onText(/\/getall/, async (msg) => {
             const base = s.basePrice || 0;
             const volume = s.volume || 0;
             const profit = volume * (price - base);
+            totalBuy += volume * base;
+            totalCurr += volume * price;
             totalProfit += profit;
 
-            const label = profit >= 0 ? '🟢Lãi' : '🔴Lỗ';
+            const label = profit >= 0 ? '📈Lãi' : '📉';
             message += `\n${s.symbol}   ${label}: ${formatNumber(Math.abs(profit))}`;
         }
 
         // Thêm tổng lãi/lỗ
-        const totalLabel = totalProfit >= 0 ? '🟢Tổng Lãi' : '🔴Tổng Lỗ';
+        const totalLabel = totalProfit >= 0 ? '📈Tổng Lãi' : '📉Tổng Lỗ';
+        const totalLabel1 = 'Tổng mua: ';
+        const totalPercent = totalCurr / totalBuy * 100 - 100;
         message += `\n------------------------`;
-        message += `\n${totalLabel}: ${formatNumber(Math.abs(totalProfit))}`;
+        message += `\n${totalLabel}: ${formatNumber(Math.abs(totalProfit))} (${totalPercent.toFixed(2)}%)\n${totalLabel1}${formatNumber(Math.abs(totalBuy))}`;
 
         bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
 
@@ -283,8 +289,8 @@ bot.onText(/\/remove (.+)/, (msg, match) => {
     bot.sendMessage(chatId, `🗑 Đã xoá stock ${code}`);
 });
 // --- Giá vốn ---
-const basePriceBuy = 82000;
-const buyVal = 26500000;
+const basePriceBuy = 59500;
+const buyVal = 21000000;
 async function getOnusVndcPrice() {
     const url = "https://spot-markets.goonus.io/trades?symbol_name=TON_VNDC";
     const res = await fetch(url, { headers: { accept: "application/json" } });
@@ -326,8 +332,6 @@ bot.onText(/\/clear/, async (msg) => {
                 // bỏ qua lỗi nếu không xóa được
             }
         }
-
-        bot.sendMessage(chatId, "✅ Đã xóa 50 tin gần nhất (nếu bot có quyền).");
     } catch (err) {
         console.error(err);
     }
@@ -349,9 +353,9 @@ bot.onText(/\/gcoin/, async (msg) => {
         const message =
             `💰 Giá TON/VNDC hiện tại: ${formatVND(price)}\n` +
             `💰 Giá TON/VNDC ban đầu: ${formatVND(basePriceBuy)}\n` +
-            `📈 Lợi nhuận%: ${profitPercent}%\n` +
-            `💵 Vốn ban đầu: ${formatVND(buyVal)}\n` +
-            `💹 Lợi nhuận: ${formatVND(profitValue)}`;
+            `📈 Lợi nhuận%: ${(profitPercent)}%\n` +
+            `💵 Vốn ban đầu: ${(formatVND(buyVal))}\n` +
+            `💹 Lợi nhuận: ${(formatVND(profitValue))}`;
 
         bot.sendMessage(chatId, message);
 
