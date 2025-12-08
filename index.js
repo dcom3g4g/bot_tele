@@ -1,7 +1,6 @@
-import fs from 'fs';
-import Apify from 'apify';
-import TelegramBot from 'node-telegram-bot-api';
 import { CheerioCrawler, RequestQueue } from '@crawlee/cheerio';
+import fs from 'fs';
+import TelegramBot from 'node-telegram-bot-api';
 
 
 // Telegram bot token
@@ -52,7 +51,31 @@ async function crawlStocks(targetCodes = null) {
             });
         }
     }
-
+bot.onText(/\/gs (.+)/, async (msg, match) => {
+    const chatId = msg.chat.id;
+    const parts = match[1].split(' ').map(p => p.trim()).filter(Boolean);
+    if (parts.length < 1) {
+        bot.sendMessage(chatId, '❌ Wrong syntax. Use: /add CODE URL BASEPRICE');
+        return;
+    }
+    const code = parts[0].toUpperCase();
+    const results = await fetchDataEachStock(code.toString().toUpperCase());
+    console.log("check varrrrrr111||", code);
+    var results1 = results[0].matchPrice;
+    console.log("check varrrrrr||", results1);
+    if (!results1) {
+        bot.sendMessage(chatId,
+            `⚠️ No data available for ${code}`);
+        return;
+    }
+    bot.sendMessage(chatId,
+        `🌈 Current price: ${results1.matchPrice}\n` +
+        `🚪 Open price: ${results1.openPrice}\n` +
+        `🐠 Change: ${results1.matchPrice - results1.referencePrice}\n` +
+        `🐠 Change Per: ${(((results1.matchPrice - results1.referencePrice) / results1.referencePrice * 100).toFixed(2))}%\n`
+    );
+    return results
+});
     const crawler = new CheerioCrawler({
         requestQueue,
         handlePageFunction: async ({ request, $ }) => {
