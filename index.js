@@ -1,8 +1,8 @@
 import { CheerioCrawler, RequestQueue } from '@crawlee/cheerio';
 import fs from 'fs';
+import fetch from "node-fetch";
 import TelegramBot from 'node-telegram-bot-api';
-
-
+import { stock } from 'vnstock-js';
 // Telegram bot token
 const TELEGRAM_TOKEN = "8338138355:AAFB-8MA-Duv2lY_sbUJB75ZJ5dEVMw0lcU";
 const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: true });
@@ -33,7 +33,11 @@ function saveStocks(stocks) {
     }
     fs.writeFileSync(DATA_FILE, lines.join('\n'), 'utf-8');
 }
-
+async function fetchDataEachStock(code) {
+    const priceBoard = await stock.priceBoard({ ticker: code });
+    console.log("check fetch 2", priceBoard)
+    return priceBoard;
+}
 // --- Crawl stocks ---
 async function crawlStocks(targetCodes = null) {
     const stocks = loadStocks();
@@ -51,31 +55,7 @@ async function crawlStocks(targetCodes = null) {
             });
         }
     }
-bot.onText(/\/gs (.+)/, async (msg, match) => {
-    const chatId = msg.chat.id;
-    const parts = match[1].split(' ').map(p => p.trim()).filter(Boolean);
-    if (parts.length < 1) {
-        bot.sendMessage(chatId, '❌ Wrong syntax. Use: /add CODE URL BASEPRICE');
-        return;
-    }
-    const code = parts[0].toUpperCase();
-    const results = await fetchDataEachStock(code.toString().toUpperCase());
-    console.log("check varrrrrr111||", code);
-    var results1 = results[0].matchPrice;
-    console.log("check varrrrrr||", results1);
-    if (!results1) {
-        bot.sendMessage(chatId,
-            `⚠️ No data available for ${code}`);
-        return;
-    }
-    bot.sendMessage(chatId,
-        `🌈 Current price: ${results1.matchPrice}\n` +
-        `🚪 Open price: ${results1.openPrice}\n` +
-        `🐠 Change: ${results1.matchPrice - results1.referencePrice}\n` +
-        `🐠 Change Per: ${(((results1.matchPrice - results1.referencePrice) / results1.referencePrice * 100).toFixed(2))}%\n`
-    );
-    return results
-});
+
     const crawler = new CheerioCrawler({
         requestQueue,
         handlePageFunction: async ({ request, $ }) => {
@@ -135,7 +115,38 @@ async function crawlStocksVNI() {
 }
 
 // --- Telegram commands ---
+async function getData() {
+  try {
+    const token = "FlJYEcyZa8OLStfreEueXwMT31d_2A2DLbxAvLM7jUx2LLUUmTawidlEpWv9g_bYc-EQumtJ1IXbLCBwaCn4tROsHpybrUSGNcAlUOJCvic1";
 
+    const bodyString = `page=1&pageSize=30&catID=1&date=2023-09-14&__RequestVerificationToken=FlJYEcyZa8OLStfreEueXwMT31d_2A2DLbxAvLM7jUx2LLUUmTawidlEpWv9g_bYc-EQumtJ1IXbLCBwaCn4tROsHpybrUSGNcAlUOJCvic1`;
+    const cookie = '__RequestVerificationToken=itgcdMQgkBrwE23iTQaHSqsHtp3oy7mZJtkaJhP_MB9yPkbWA1HrEPVYSyki9vmPjjlCz4n4TlitXwVpPMw-Sze8jP77B7Iqueof9kyzWA41;'
+    const res = await fetch("https://finance.vietstock.vn/data/KQGDThongKeGiaPaging", {
+      method: "POST",
+      headers: {
+        "Accept": "*/*",
+        "Accept-Language": "en-GB,en;q=0.9,en-US;q=0.8",
+        Cookie: cookie,
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.31",
+      },
+      body: bodyString,
+    });
+
+    const text = await res.text();
+
+    try {
+      const json = JSON.parse(text);
+      console.log("JSON:", json[0][0]);
+      return json[0][0];
+    } catch {
+      console.log("❌ FAIL: Server trả HTML, token không đúng");
+    }
+
+  } catch (err) {
+    console.error(err);
+  }
+}
 // /get <code>
 bot.onText(/\/get (.+)/, async (msg, match) => {
     const chatId = msg.chat.id;
@@ -163,31 +174,31 @@ bot.onText(/\/get (.+)/, async (msg, match) => {
     }
 });
 
-bot.onText(/\/gvni/, async (msg, match) => {
-    const chatId = msg.chat.id;
-    const code = 'VNINDEX';
+// bot.onText(/\/gvni/, async (msg, match) => {
+//     const chatId = msg.chat.id;
+//     const code = 'VNINDEX';
 
-    bot.sendMessage(chatId, `🔍 Lấy dữ liệu cho ${code}...`);
+//     bot.sendMessage(chatId, `🔍 Lấy dữ liệu cho ${code}...`);
 
-    try {
-        const results = await crawlStocksVNI([code]);
-        if (!results.length) {
-            bot.sendMessage(chatId, `❌ Không tìm thấy dữ liệu cho ${code}`);
-            return;
-        }
+//     try {
+//         const results = await crawlStocksVNI([code]);
+//         if (!results.length) {
+//             bot.sendMessage(chatId, `❌ Không tìm thấy dữ liệu cho ${code}`);
+//             return;
+//         }
 
-        const s = results[0];
-        bot.sendMessage(chatId,
-            `📊 ${s.symbol} - ${s.company}\n` +
-            `💰 Giá: ${s.price}\n` +
-            `📈 Change: ${s.change}\n` +
-            (`🔹 Base: ${s.basePrice}\n🔺 Diff: ${s.diff} (${s.diffPct})`)
-        );
-    } catch (err) {
-        console.error(err);
-        bot.sendMessage(chatId, '⚠️ Lỗi khi lấy dữ liệu.');
-    }
-});
+//         const s = results[0];
+//         bot.sendMessage(chatId,
+//             `📊 ${s.symbol} - ${s.company}\n` +
+//             `💰 Giá: ${s.price}\n` +
+//             `📈 Change: ${s.change}\n` +
+//             (`🔹 Base: ${s.basePrice}\n🔺 Diff: ${s.diff} (${s.diffPct})`)
+//         );
+//     } catch (err) {
+//         console.error(err);
+//         bot.sendMessage(chatId, '⚠️ Lỗi khi lấy dữ liệu.');
+//     }
+// });
 // /getall
 bot.onText(/\/getall/, async (msg) => {
     const chatId = msg.chat.id;
@@ -232,6 +243,7 @@ bot.onText(/\/getall/, async (msg) => {
         let totalProfit = 0;
         let totalBuy = 0;
         let totalCurr = 0;
+        let totalToday =0;
         let message1 = '📊 Kết quả lãi/lỗ từng mã:';
         message + - message1;
         for (const s of results) {
@@ -242,17 +254,41 @@ bot.onText(/\/getall/, async (msg) => {
             totalBuy += volume * base;
             totalCurr += volume * price;
             totalProfit += profit;
-
+            totalToday += volume * (price - (price - parseFloat(s.change.replace(/,/g, ''))));
             const label = profit >= 0 ? '📈Lãi' : '📉';
             message += `\n${s.symbol}   ${label}: ${formatNumber(Math.abs(profit))}`;
         }
-
+        console.log("Total Today:", totalToday);
         // Thêm tổng lãi/lỗ
         const totalLabel = totalProfit >= 0 ? '📈Tổng Lãi' : '📉Tổng Lỗ';
         const totalLabel1 = 'Tổng mua: ';
         const totalPercent = totalCurr / totalBuy * 100 - 100;
         message += `\n------------------------`;
         message += `\n${totalLabel}: ${formatNumber(Math.abs(totalProfit))} (${totalPercent.toFixed(2)}%)\n${totalLabel1}${formatNumber(Math.abs(totalBuy))}`;
+        message += `\nLãi/Lỗ hôm nay: ${formatNumber(totalToday)}`;
+        bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
+
+
+    } catch (err) {
+        console.error(err);
+        bot.sendMessage(chatId, '⚠️ Lỗi khi lấy dữ liệu.');
+    }
+});
+// /getall
+bot.onText(/\/gvni/, async (msg) => {
+    const chatId = msg.chat.id;
+    bot.sendMessage(chatId, '🔍 Lấy dữ liệu vni...');
+
+    try {
+        let results = await getData();
+        console.log("check varrrrrr222||", results);
+        // if (!results.length) return bot.sendMessage(chatId, '⚠️ Không có dữ liệu.');
+        let message = '';
+        message += `\n------------------------`;
+        message += `\n Giá Ban Đầu: ${results.PriorIndex}`;
+        message += `\n Giá Hiện Tại: ${(results.CloseIndex)}`;
+        message += `\n Change: ${(results.CloseIndex-results.PriorIndex)}`;
+        message += `\n Percent: ${results.PerChange}%`;
 
         bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
 
@@ -294,7 +330,30 @@ bot.onText(/\/add (.+)/, (msg, match) => {
 
     saveStocks(stocks);
 });
-
+bot.onText(/\/gs (.+)/, async (msg, match) => {
+    const chatId = msg.chat.id;
+    const parts = match[1].split(' ').map(p => p.trim()).filter(Boolean);
+    if (parts.length < 1) {
+        bot.sendMessage(chatId, '❌ Wrong syntax. Use: /add CODE URL BASEPRICE');
+        return;
+    }
+    const code = parts[0].toUpperCase();
+    const results = await fetchDataEachStock(code.toString().toUpperCase());
+    console.log("check varrrrrr111||", code);
+    var results1 = results[0].matchPrice;
+    console.log("check varrrrrr||", results1);
+    if (!results1) {
+        bot.sendMessage(chatId,
+            `⚠️ No data available for ${code}`);
+        return;
+    }
+    bot.sendMessage(chatId,
+        `🌈 Current price: ${results1.matchPrice}\n` +
+        `🚪 Open price: ${results1.openPrice}\n` +
+        `🐠 Change: ${results1.matchPrice - results1.referencePrice}\n` +
+        `🐠 Change Per: ${(((results1.matchPrice - results1.referencePrice) / results1.referencePrice * 100).toFixed(2))}%\n`
+    );
+});
 // /remove <code>
 bot.onText(/\/remove (.+)/, (msg, match) => {
     const chatId = msg.chat.id;

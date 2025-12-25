@@ -1,0 +1,9 @@
+{
+	"id": "GS1487vv8AZGeQQ",
+	"json": "{\"id\":\"GS1487vv8AZGeQQ\",\"url\":\"https://finance.vietstock.vn/CMG-ctcp-tap-doan-cong-nghe-cmc.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/CMG-ctcp-tap-doan-cong-nghe-cmc.htm\",\"uniqueKey\":\"CMG-1765438073249\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"CMG\",\"url\":\"https://finance.vietstock.vn/CMG-ctcp-tap-doan-cong-nghe-cmc.htm\",\"basePrice\":36640,\"volume\":500},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-11T07:27:54.016Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "CMG-1765438073249",
+	"url": "https://finance.vietstock.vn/CMG-ctcp-tap-doan-cong-nghe-cmc.htm"
+}

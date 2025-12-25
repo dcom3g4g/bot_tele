@@ -1,9 +1,9 @@
 {
-  "usableSessionsCount": 12,
+  "usableSessionsCount": 5,
   "retiredSessionsCount": 0,
   "sessions": [
     {
-      "id": "session_as5QCwVkkJ",
+      "id": "session_w9lgyh9RVX",
       "cookieJar": {
         "version": "tough-cookie@5.1.2",
         "storeType": "MemoryCookieStore",
@@ -15,178 +15,56 @@
           {
             "key": "language",
             "value": "vi-VN",
-            "expires": "2026-01-08T02:50:57.000Z",
+            "expires": "2026-01-25T08:00:25.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T02:50:54.756Z",
-            "lastAccessed": "2025-12-08T02:50:54.756Z"
+            "creation": "2025-12-25T08:00:26.200Z",
+            "lastAccessed": "2025-12-25T08:00:26.200Z"
           },
           {
             "key": "ASP.NET_SessionId",
-            "value": "qebwku5gmqytl0css5u0xlq4",
+            "value": "uoj4qxsdxkomyz3xvmeei3q1",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T02:50:54.756Z",
-            "lastAccessed": "2025-12-08T02:50:54.756Z"
-          },
-          {
-            "key": "finance_viewedstock",
-            "value": "YEG,",
-            "expires": "2025-12-08T04:50:58.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T02:50:54.756Z",
-            "lastAccessed": "2025-12-08T02:50:54.756Z"
-          },
-          {
-            "key": "__RequestVerificationToken",
-            "value": "t8Jjbvp3V1Yy_MD1_xYSl5crKN4ey2WxOLPtr6d7lHckA3G6KLV9xbTc67-tBC2wNAjJE1GtXxuCx0MtWLFqiON2EEOkAWGpNVk-G3oye-o1",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T02:50:54.756Z",
-            "lastAccessed": "2025-12-08T02:50:54.756Z"
-          }
-        ]
-      },
-      "userData": {},
-      "maxErrorScore": 3,
-      "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T03:40:54.000Z",
-      "createdAt": "2025-12-08T02:50:54.000Z",
-      "usageCount": 1,
-      "maxUsageCount": 50,
-      "errorScore": 0
-    },
-    {
-      "id": "session_Z7H3IbOpgL",
-      "cookieJar": {
-        "version": "tough-cookie@5.1.2",
-        "storeType": "MemoryCookieStore",
-        "rejectPublicSuffixes": true,
-        "enableLooseMode": false,
-        "allowSpecialUseDomain": true,
-        "prefixSecurity": "silent",
-        "cookies": [
-          {
-            "key": "language",
-            "value": "vi-VN",
-            "expires": "2026-01-08T02:50:57.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T02:50:55.123Z",
-            "lastAccessed": "2025-12-08T02:50:55.123Z"
-          },
-          {
-            "key": "ASP.NET_SessionId",
-            "value": "hppt1v10wax51zvfstkwydyy",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T02:50:55.123Z",
-            "lastAccessed": "2025-12-08T02:50:55.123Z"
-          },
-          {
-            "key": "finance_viewedstock",
-            "value": "CTR,",
-            "expires": "2025-12-08T04:50:57.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T02:50:55.123Z",
-            "lastAccessed": "2025-12-08T02:50:55.123Z"
-          },
-          {
-            "key": "__RequestVerificationToken",
-            "value": "Ga6hT0WijMe_9koqHNkwWZYnnPn5DkSrQel8q2UsK3ARjK8r8Htra9of9ZI3lv7TiaCS_rhqRcvaBQ6_Gho-8pvs_uZ0uCm_d7L-ILk2KDw1",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T02:50:55.123Z",
-            "lastAccessed": "2025-12-08T02:50:55.123Z"
-          }
-        ]
-      },
-      "userData": {},
-      "maxErrorScore": 3,
-      "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T03:40:54.005Z",
-      "createdAt": "2025-12-08T02:50:54.005Z",
-      "usageCount": 1,
-      "maxUsageCount": 50,
-      "errorScore": 0
-    },
-    {
-      "id": "session_2VGkGUADMg",
-      "cookieJar": {
-        "version": "tough-cookie@5.1.2",
-        "storeType": "MemoryCookieStore",
-        "rejectPublicSuffixes": true,
-        "enableLooseMode": false,
-        "allowSpecialUseDomain": true,
-        "prefixSecurity": "silent",
-        "cookies": [
-          {
-            "key": "language",
-            "value": "vi-VN",
-            "expires": "2026-01-08T02:50:55.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T02:50:55.146Z",
-            "lastAccessed": "2025-12-08T02:50:55.146Z"
-          },
-          {
-            "key": "ASP.NET_SessionId",
-            "value": "lccbqoifpn5gbgmm11kcbjva",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T02:50:55.146Z",
-            "lastAccessed": "2025-12-08T02:50:55.146Z"
+            "creation": "2025-12-25T08:00:26.200Z",
+            "lastAccessed": "2025-12-25T08:00:26.200Z"
           },
           {
             "key": "finance_viewedstock",
             "value": "VGC,",
-            "expires": "2025-12-08T04:50:55.000Z",
+            "expires": "2025-12-25T10:00:25.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T02:50:55.146Z",
-            "lastAccessed": "2025-12-08T02:50:55.146Z"
+            "creation": "2025-12-25T08:00:26.200Z",
+            "lastAccessed": "2025-12-25T08:00:26.200Z"
           },
           {
             "key": "__RequestVerificationToken",
-            "value": "mXN3MJigHi-Hx-Xxe5WgveH3q7TLV0mvKyKaerIGFm6GVs0r3gPnQTCErfgexctWkilMZa-fENvGh_DB-qLA4ZJ6V614EVF2oTe_DdWfV3s1",
+            "value": "2_RIE9Q5FXSIaEX5caTv5enf_hGXD6sVZhWHBOi1LJYXsTkHWtrhop88llJtnbwzZC8vorZZ2JLMLRfpNGeO79gwrJfSVrl3VYanv8b0usE1",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T02:50:55.146Z",
-            "lastAccessed": "2025-12-08T02:50:55.146Z"
+            "creation": "2025-12-25T08:00:26.200Z",
+            "lastAccessed": "2025-12-25T08:00:26.200Z"
           }
         ]
       },
       "userData": {},
       "maxErrorScore": 3,
       "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T03:40:54.012Z",
-      "createdAt": "2025-12-08T02:50:54.012Z",
+      "expiresAt": "2025-12-25T08:50:25.578Z",
+      "createdAt": "2025-12-25T08:00:25.578Z",
       "usageCount": 1,
       "maxUsageCount": 50,
       "errorScore": 0
     },
     {
-      "id": "session_ItHvMo7mq0",
+      "id": "session_AhJNu7dwTV",
       "cookieJar": {
         "version": "tough-cookie@5.1.2",
         "storeType": "MemoryCookieStore",
@@ -198,56 +76,56 @@
           {
             "key": "language",
             "value": "vi-VN",
-            "expires": "2026-01-08T03:05:05.000Z",
+            "expires": "2026-01-25T08:00:26.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.562Z",
-            "lastAccessed": "2025-12-08T03:05:01.562Z"
+            "creation": "2025-12-25T08:00:26.294Z",
+            "lastAccessed": "2025-12-25T08:00:26.294Z"
           },
           {
             "key": "ASP.NET_SessionId",
-            "value": "ibmlnj0gr1llsl15zphfkcvl",
+            "value": "ehmdx0ndnupvbqtvy4a4efz1",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.562Z",
-            "lastAccessed": "2025-12-08T03:05:01.562Z"
+            "creation": "2025-12-25T08:00:26.294Z",
+            "lastAccessed": "2025-12-25T08:00:26.294Z"
           },
           {
             "key": "finance_viewedstock",
-            "value": "YEG,",
-            "expires": "2025-12-08T05:05:05.000Z",
+            "value": "CMG,",
+            "expires": "2025-12-25T10:00:26.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.562Z",
-            "lastAccessed": "2025-12-08T03:05:01.562Z"
+            "creation": "2025-12-25T08:00:26.294Z",
+            "lastAccessed": "2025-12-25T08:00:26.294Z"
           },
           {
             "key": "__RequestVerificationToken",
-            "value": "WKEodjGn8ejR4MYRe637aebNgUYZEhaWYI3ZVytpacVrGwQiiQ06paV01DhUsGCNAPhnZ_I9rhnoNIgfh3mQwU0e5nBViU7U2V3er5DqQqg1",
+            "value": "5SzVI7paMrEXc82KMd4w4wHYOuJzi0_eODma0awr-LUK8JIw27KV2X3mxMHj5ifYzcBBcvtvlVTf_A6gXzCmXPfh6xWyLMQC67-b-d8u9PA1",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.562Z",
-            "lastAccessed": "2025-12-08T03:05:01.562Z"
+            "creation": "2025-12-25T08:00:26.294Z",
+            "lastAccessed": "2025-12-25T08:00:26.294Z"
           }
         ]
       },
       "userData": {},
       "maxErrorScore": 3,
       "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T03:55:01.048Z",
-      "createdAt": "2025-12-08T03:05:01.048Z",
+      "expiresAt": "2025-12-25T08:50:25.585Z",
+      "createdAt": "2025-12-25T08:00:25.585Z",
       "usageCount": 1,
       "maxUsageCount": 50,
       "errorScore": 0
     },
     {
-      "id": "session_IfH1W5JUup",
+      "id": "session_Owsc2KKQyq",
       "cookieJar": {
         "version": "tough-cookie@5.1.2",
         "storeType": "MemoryCookieStore",
@@ -259,56 +137,56 @@
           {
             "key": "language",
             "value": "vi-VN",
-            "expires": "2026-01-08T03:05:05.000Z",
+            "expires": "2026-01-25T08:00:26.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.615Z",
-            "lastAccessed": "2025-12-08T03:05:01.615Z"
+            "creation": "2025-12-25T08:00:26.084Z",
+            "lastAccessed": "2025-12-25T08:00:26.084Z"
           },
           {
             "key": "ASP.NET_SessionId",
-            "value": "wupllretjkezchgpt1zed2pd",
+            "value": "b3r4tkgdtob1bzlvejckffak",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.615Z",
-            "lastAccessed": "2025-12-08T03:05:01.615Z"
+            "creation": "2025-12-25T08:00:26.084Z",
+            "lastAccessed": "2025-12-25T08:00:26.085Z"
           },
           {
             "key": "finance_viewedstock",
-            "value": "CTR,",
-            "expires": "2025-12-08T05:05:05.000Z",
+            "value": "BCM,",
+            "expires": "2025-12-25T10:00:26.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.615Z",
-            "lastAccessed": "2025-12-08T03:05:01.615Z"
+            "creation": "2025-12-25T08:00:26.085Z",
+            "lastAccessed": "2025-12-25T08:00:26.085Z"
           },
           {
             "key": "__RequestVerificationToken",
-            "value": "EWuPb1HHjKc5jxKckUlPBig67OWrppcgfWdL-DM6RGoInosFJW1wt90f3OQzcz4dLBmk3pFE0qEZkKFgKkjGHplZzIIPtxmP5yvTR10hnG41",
+            "value": "0m7t-WvBqwD1dUk73TKC_Ush2w90r_t5BPi9OZW7fK9Sa8c5Euk1pkypoDrnXHPDFEcC9bpOcahOzd2cus_9SF1Ru0JHFZN93qIkL0tL9a01",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.615Z",
-            "lastAccessed": "2025-12-08T03:05:01.615Z"
+            "creation": "2025-12-25T08:00:26.085Z",
+            "lastAccessed": "2025-12-25T08:00:26.085Z"
           }
         ]
       },
       "userData": {},
       "maxErrorScore": 3,
       "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T03:55:01.054Z",
-      "createdAt": "2025-12-08T03:05:01.054Z",
+      "expiresAt": "2025-12-25T08:50:25.586Z",
+      "createdAt": "2025-12-25T08:00:25.586Z",
       "usageCount": 1,
       "maxUsageCount": 50,
       "errorScore": 0
     },
     {
-      "id": "session_62oAUjFC2z",
+      "id": "session_1vCDd0ggED",
       "cookieJar": {
         "version": "tough-cookie@5.1.2",
         "storeType": "MemoryCookieStore",
@@ -320,178 +198,56 @@
           {
             "key": "language",
             "value": "vi-VN",
-            "expires": "2026-01-08T03:05:05.000Z",
+            "expires": "2026-01-25T08:00:26.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.642Z",
-            "lastAccessed": "2025-12-08T03:05:01.642Z"
+            "creation": "2025-12-25T08:00:26.149Z",
+            "lastAccessed": "2025-12-25T08:00:26.149Z"
           },
           {
             "key": "ASP.NET_SessionId",
-            "value": "th1iss1cpap3h1nhy2wz5j3s",
+            "value": "o4g0mepw1ddgpesasrl1suoh",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.642Z",
-            "lastAccessed": "2025-12-08T03:05:01.642Z"
-          },
-          {
-            "key": "finance_viewedstock",
-            "value": "VGC,",
-            "expires": "2025-12-08T05:05:05.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.642Z",
-            "lastAccessed": "2025-12-08T03:05:01.642Z"
-          },
-          {
-            "key": "__RequestVerificationToken",
-            "value": "Ruer_S7hrdOdoWtX6vWv-ycVZhtIvAmgQAJyiw4-41foZGZMB9bwDbYmKlnh0UgajmsVRDFrb2jato4WWOJdWkTaQ8jdXGxbFSTXPsmXfsM1",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:05:01.642Z",
-            "lastAccessed": "2025-12-08T03:05:01.642Z"
-          }
-        ]
-      },
-      "userData": {},
-      "maxErrorScore": 3,
-      "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T03:55:01.061Z",
-      "createdAt": "2025-12-08T03:05:01.061Z",
-      "usageCount": 1,
-      "maxUsageCount": 50,
-      "errorScore": 0
-    },
-    {
-      "id": "session_csfmoxUpoR",
-      "cookieJar": {
-        "version": "tough-cookie@5.1.2",
-        "storeType": "MemoryCookieStore",
-        "rejectPublicSuffixes": true,
-        "enableLooseMode": false,
-        "allowSpecialUseDomain": true,
-        "prefixSecurity": "silent",
-        "cookies": [
-          {
-            "key": "language",
-            "value": "vi-VN",
-            "expires": "2026-01-08T03:22:24.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.834Z",
-            "lastAccessed": "2025-12-08T03:22:20.834Z"
-          },
-          {
-            "key": "ASP.NET_SessionId",
-            "value": "qpteurrrkqstmej4jzq43ygn",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.834Z",
-            "lastAccessed": "2025-12-08T03:22:20.834Z"
-          },
-          {
-            "key": "finance_viewedstock",
-            "value": "YEG,",
-            "expires": "2025-12-08T05:22:24.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.834Z",
-            "lastAccessed": "2025-12-08T03:22:20.834Z"
-          },
-          {
-            "key": "__RequestVerificationToken",
-            "value": "9HUoUm9E6c6_ZLtE3mvQLsSDpVIUgHAz4ohFu9dopG5INn5HEqOy3XspLeK2kZVNGOcnYEsWXXEBFpB8Tp-99eLqi8UCmf30jI3x34gMpco1",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.834Z",
-            "lastAccessed": "2025-12-08T03:22:20.834Z"
-          }
-        ]
-      },
-      "userData": {},
-      "maxErrorScore": 3,
-      "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T04:12:20.337Z",
-      "createdAt": "2025-12-08T03:22:20.337Z",
-      "usageCount": 1,
-      "maxUsageCount": 50,
-      "errorScore": 0
-    },
-    {
-      "id": "session_SrM854iDru",
-      "cookieJar": {
-        "version": "tough-cookie@5.1.2",
-        "storeType": "MemoryCookieStore",
-        "rejectPublicSuffixes": true,
-        "enableLooseMode": false,
-        "allowSpecialUseDomain": true,
-        "prefixSecurity": "silent",
-        "cookies": [
-          {
-            "key": "language",
-            "value": "vi-VN",
-            "expires": "2026-01-08T03:22:24.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.734Z",
-            "lastAccessed": "2025-12-08T03:22:20.734Z"
-          },
-          {
-            "key": "ASP.NET_SessionId",
-            "value": "tlojsrqy5rtl4yc1wvnrui1l",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.734Z",
-            "lastAccessed": "2025-12-08T03:22:20.734Z"
+            "creation": "2025-12-25T08:00:26.149Z",
+            "lastAccessed": "2025-12-25T08:00:26.149Z"
           },
           {
             "key": "finance_viewedstock",
             "value": "CTR,",
-            "expires": "2025-12-08T05:22:24.000Z",
+            "expires": "2025-12-25T10:00:26.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.734Z",
-            "lastAccessed": "2025-12-08T03:22:20.734Z"
+            "creation": "2025-12-25T08:00:26.149Z",
+            "lastAccessed": "2025-12-25T08:00:26.149Z"
           },
           {
             "key": "__RequestVerificationToken",
-            "value": "dWwrMUWuQf0pABQSYc_sblOmIYcrASGdq83o6mZSKmwCkDQTv1e2CKGsQb_ME_P1cfzQPjNXp3L2ioZOJNl9CAHoqZ6BTZWWw9J27ni62K81",
+            "value": "XneHkbMGysM1SrGRi94sN4v1yDSp1RKDJzkb85M1qNVd6RJYp5eqR0CZPu9lR1iTYuAg65CoeyrrKk2jrvx7lgRQgndZWo3fEnqUNL8Ouvo1",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.734Z",
-            "lastAccessed": "2025-12-08T03:22:20.734Z"
+            "creation": "2025-12-25T08:00:26.149Z",
+            "lastAccessed": "2025-12-25T08:00:26.149Z"
           }
         ]
       },
       "userData": {},
       "maxErrorScore": 3,
       "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T04:12:20.343Z",
-      "createdAt": "2025-12-08T03:22:20.343Z",
+      "expiresAt": "2025-12-25T08:50:25.592Z",
+      "createdAt": "2025-12-25T08:00:25.592Z",
       "usageCount": 1,
       "maxUsageCount": 50,
       "errorScore": 0
     },
     {
-      "id": "session_PwyClVKUq1",
+      "id": "session_ZE2OFnBkcu",
       "cookieJar": {
         "version": "tough-cookie@5.1.2",
         "storeType": "MemoryCookieStore",
@@ -503,233 +259,50 @@
           {
             "key": "language",
             "value": "vi-VN",
-            "expires": "2026-01-08T03:22:24.000Z",
+            "expires": "2026-01-25T08:00:26.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.794Z",
-            "lastAccessed": "2025-12-08T03:22:20.794Z"
+            "creation": "2025-12-25T08:00:26.223Z",
+            "lastAccessed": "2025-12-25T08:00:26.223Z"
           },
           {
             "key": "ASP.NET_SessionId",
-            "value": "y14pj1egvfze2bm5yyzth0yw",
+            "value": "zljhvkqstt2dqulycfj5rsvd",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.794Z",
-            "lastAccessed": "2025-12-08T03:22:20.794Z"
+            "creation": "2025-12-25T08:00:26.223Z",
+            "lastAccessed": "2025-12-25T08:00:26.223Z"
           },
           {
             "key": "finance_viewedstock",
-            "value": "VGC,",
-            "expires": "2025-12-08T05:22:24.000Z",
+            "value": "DGC,",
+            "expires": "2025-12-25T10:00:26.000Z",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.794Z",
-            "lastAccessed": "2025-12-08T03:22:20.794Z"
+            "creation": "2025-12-25T08:00:26.223Z",
+            "lastAccessed": "2025-12-25T08:00:26.223Z"
           },
           {
             "key": "__RequestVerificationToken",
-            "value": "BFxHGrbxudwQ6txilzBDg22K79W2p_t0KcxHslbZ55_fdxc-ZPYW4AHAnea6aKUeZnu3qLXT-69ooaf_DMSLHA_HsRfmNKksyAF9BNLnpXM1",
+            "value": "3OYeSb2FOXT-OJk6LGh8it68wnM5EIVJjQOfgErLFPBrSi_sd0ApQpz8VQ1LeMEgbo95H0Vew2Br2Qc_Lb77TUr7adc4eBffkm3kCEHgAv81",
             "domain": "finance.vietstock.vn",
             "path": "/",
             "httpOnly": true,
             "hostOnly": true,
-            "creation": "2025-12-08T03:22:20.794Z",
-            "lastAccessed": "2025-12-08T03:22:20.794Z"
+            "creation": "2025-12-25T08:00:26.223Z",
+            "lastAccessed": "2025-12-25T08:00:26.223Z"
           }
         ]
       },
       "userData": {},
       "maxErrorScore": 3,
       "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T04:12:20.348Z",
-      "createdAt": "2025-12-08T03:22:20.348Z",
-      "usageCount": 1,
-      "maxUsageCount": 50,
-      "errorScore": 0
-    },
-    {
-      "id": "session_QfpsPCHaIK",
-      "cookieJar": {
-        "version": "tough-cookie@5.1.2",
-        "storeType": "MemoryCookieStore",
-        "rejectPublicSuffixes": true,
-        "enableLooseMode": false,
-        "allowSpecialUseDomain": true,
-        "prefixSecurity": "silent",
-        "cookies": [
-          {
-            "key": "language",
-            "value": "vi-VN",
-            "expires": "2026-01-08T03:36:46.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:44.223Z",
-            "lastAccessed": "2025-12-08T03:36:44.223Z"
-          },
-          {
-            "key": "ASP.NET_SessionId",
-            "value": "emcotxqw2xcw24zif0nulrfm",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:44.223Z",
-            "lastAccessed": "2025-12-08T03:36:44.223Z"
-          },
-          {
-            "key": "finance_viewedstock",
-            "value": "YEG,",
-            "expires": "2025-12-08T05:36:46.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:44.223Z",
-            "lastAccessed": "2025-12-08T03:36:44.223Z"
-          },
-          {
-            "key": "__RequestVerificationToken",
-            "value": "zqnD5-a5Vy6gdpzVXgdgOcB7zKLXOUIhFCnaNUM-N-t4iVHdHCaEdFgpBEypciRVpeaftvoW3QPmddVmuU4YOldMyJLbyW-kF-X4PCf-W7Q1",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:44.223Z",
-            "lastAccessed": "2025-12-08T03:36:44.223Z"
-          }
-        ]
-      },
-      "userData": {},
-      "maxErrorScore": 3,
-      "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T04:26:42.034Z",
-      "createdAt": "2025-12-08T03:36:42.034Z",
-      "usageCount": 1,
-      "maxUsageCount": 50,
-      "errorScore": 0
-    },
-    {
-      "id": "session_bncfovT4GE",
-      "cookieJar": {
-        "version": "tough-cookie@5.1.2",
-        "storeType": "MemoryCookieStore",
-        "rejectPublicSuffixes": true,
-        "enableLooseMode": false,
-        "allowSpecialUseDomain": true,
-        "prefixSecurity": "silent",
-        "cookies": [
-          {
-            "key": "language",
-            "value": "vi-VN",
-            "expires": "2026-01-08T03:36:46.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:42.760Z",
-            "lastAccessed": "2025-12-08T03:36:42.760Z"
-          },
-          {
-            "key": "ASP.NET_SessionId",
-            "value": "pyzjyo2ffqat2vlcdbh3jnzf",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:42.760Z",
-            "lastAccessed": "2025-12-08T03:36:42.760Z"
-          },
-          {
-            "key": "finance_viewedstock",
-            "value": "CTR,",
-            "expires": "2025-12-08T05:36:46.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:42.760Z",
-            "lastAccessed": "2025-12-08T03:36:42.760Z"
-          },
-          {
-            "key": "__RequestVerificationToken",
-            "value": "foBJKFP0HsEapV33BFDw51gmGBv5fVRHXYuiXyPEohLbdaCJtAZTRJdEq44O0ZAlcVnow-Ygp3A2ZzTi5Lf_gT0NRiScKlVT20m0fM24lYU1",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:42.760Z",
-            "lastAccessed": "2025-12-08T03:36:42.760Z"
-          }
-        ]
-      },
-      "userData": {},
-      "maxErrorScore": 3,
-      "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T04:26:42.040Z",
-      "createdAt": "2025-12-08T03:36:42.040Z",
-      "usageCount": 1,
-      "maxUsageCount": 50,
-      "errorScore": 0
-    },
-    {
-      "id": "session_x5Z5MtFCFa",
-      "cookieJar": {
-        "version": "tough-cookie@5.1.2",
-        "storeType": "MemoryCookieStore",
-        "rejectPublicSuffixes": true,
-        "enableLooseMode": false,
-        "allowSpecialUseDomain": true,
-        "prefixSecurity": "silent",
-        "cookies": [
-          {
-            "key": "language",
-            "value": "vi-VN",
-            "expires": "2026-01-08T03:36:46.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:42.806Z",
-            "lastAccessed": "2025-12-08T03:36:42.806Z"
-          },
-          {
-            "key": "ASP.NET_SessionId",
-            "value": "xpbj2olwcq4zpzeqj0kjdd1w",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:42.806Z",
-            "lastAccessed": "2025-12-08T03:36:42.806Z"
-          },
-          {
-            "key": "finance_viewedstock",
-            "value": "VGC,",
-            "expires": "2025-12-08T05:36:46.000Z",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:42.806Z",
-            "lastAccessed": "2025-12-08T03:36:42.806Z"
-          },
-          {
-            "key": "__RequestVerificationToken",
-            "value": "wr8_UkvyM_063_Sf1b8P79JADURVHSxzWdPFXk8DCXzhdvOvTmuJX3HTEMKgKH3-7EgCV5yniqFrtAFQaKE4kS9jVroD3i2BFCjWJnrFz-A1",
-            "domain": "finance.vietstock.vn",
-            "path": "/",
-            "httpOnly": true,
-            "hostOnly": true,
-            "creation": "2025-12-08T03:36:42.806Z",
-            "lastAccessed": "2025-12-08T03:36:42.806Z"
-          }
-        ]
-      },
-      "userData": {},
-      "maxErrorScore": 3,
-      "errorScoreDecrement": 0.5,
-      "expiresAt": "2025-12-08T04:26:42.044Z",
-      "createdAt": "2025-12-08T03:36:42.044Z",
+      "expiresAt": "2025-12-25T08:50:25.707Z",
+      "createdAt": "2025-12-25T08:00:25.707Z",
       "usageCount": 1,
       "maxUsageCount": 50,
       "errorScore": 0

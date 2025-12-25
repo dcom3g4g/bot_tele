@@ -1,0 +1,9 @@
+{
+	"id": "v0FSi6Ow4X8x6hW",
+	"json": "{\"id\":\"v0FSi6Ow4X8x6hW\",\"url\":\"https://finance.vietstock.vn/VGC-tong-cong-ty-viglacera-ctcp.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/VGC-tong-cong-ty-viglacera-ctcp.htm\",\"uniqueKey\":\"VGC-1766546681240\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"VGC\",\"url\":\"https://finance.vietstock.vn/VGC-tong-cong-ty-viglacera-ctcp.htm\",\"basePrice\":43540,\"volume\":400},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-24T03:24:41.944Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "VGC-1766546681240",
+	"url": "https://finance.vietstock.vn/VGC-tong-cong-ty-viglacera-ctcp.htm"
+}

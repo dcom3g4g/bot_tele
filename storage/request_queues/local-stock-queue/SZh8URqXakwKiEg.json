@@ -1,0 +1,9 @@
+{
+	"id": "SZh8URqXakwKiEg",
+	"json": "{\"id\":\"SZh8URqXakwKiEg\",\"url\":\"https://finance.vietstock.vn/YEG-ctcp-tap-doan-yeah1.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/YEG-ctcp-tap-doan-yeah1.htm\",\"uniqueKey\":\"YEG-1765770887322\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"YEG\",\"url\":\"https://finance.vietstock.vn/YEG-ctcp-tap-doan-yeah1.htm\",\"basePrice\":12260,\"volume\":2100},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-15T03:54:49.555Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "YEG-1765770887322",
+	"url": "https://finance.vietstock.vn/YEG-ctcp-tap-doan-yeah1.htm"
+}

@@ -1,0 +1,9 @@
+{
+	"id": "jTpodKJi0KYRtwu",
+	"json": "{\"id\":\"jTpodKJi0KYRtwu\",\"url\":\"https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm\",\"uniqueKey\":\"CTR-1765337193060\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":1,\"errorMessages\":[\"Error: 503 - Internal Server Error: The service is unavailable.\\n    at CheerioCrawler._parseResponse (D:\\\\bot_tele\\\\node_modules\\\\@crawlee\\\\http\\\\internals\\\\http-crawler.js:496:19)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\\n    at async CheerioCrawler._runRequestHandler (D:\\\\bot_tele\\\\node_modules\\\\@crawlee\\\\http\\\\internals\\\\http-crawler.js:305:28)\\n    at async CheerioCrawler._runRequestHandler (D:\\\\bot_tele\\\\node_modules\\\\@crawlee\\\\cheerio\\\\internals\\\\cheerio-crawler.js:153:9)\\n    at async wrap (D:\\\\bot_tele\\\\node_modules\\\\@apify\\\\timeout\\\\cjs\\\\index.cjs:54:21)\"],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"CTR\",\"url\":\"https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm\",\"basePrice\":84780,\"volume\":400},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-10T03:26:36.056Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 1,
+	"uniqueKey": "CTR-1765337193060",
+	"url": "https://finance.vietstock.vn/CTR-tong-cong-ty-co-phan-cong-trinh-viettel.htm"
+}

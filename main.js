@@ -1,29 +1,74 @@
-import fetch from "node-fetch";
+import { createCanvas, loadImage } from 'canvas';
+import fs from 'fs';
 
-async function getVNIndex() {
-  const url = "https://finance.vietstock.vn/Data/GeneralMarket_GetMarketIndexVNData";
+const INPUT_IMAGE = './numbers.png';
+const OUTPUT_DIR = './output';
+const ALPHA_THRESHOLD = 10;
 
-  const res = await fetch(url, {
-    method: "GET",
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-      "Accept": "application/json, text/javascript, */*; q=0.01",
-      "Referer": "https://finance.vietstock.vn/",
-      "X-Requested-With": "XMLHttpRequest", // nhiều site .NET cần cái này
-    },
-  });
-
-  const text = await res.text();
-  console.log("Raw response:", text.slice(0, 200)); // in thử 200 ký tự đầu
-
-  try {
-    const json = JSON.parse(text);
-    console.log("📊 VNINDEX JSON:", json);
-    return json;
-  } catch (err) {
-    console.error("❌ Không parse được JSON:", err.message);
-  }
+if (!fs.existsSync(OUTPUT_DIR)) {
+  fs.mkdirSync(OUTPUT_DIR);
 }
 
-getVNIndex();
+function columnHasPixel(data, width, height, col) {
+  for (let y = 0; y < height; y++) {
+    const index = (y * width + col) * 2 + 3;
+    if (data[index] > ALPHA_THRESHOLD) return true;
+  }
+  return false;
+}
+
+async function autoSlice() {
+  const img = await loadImage(INPUT_IMAGE);
+  const canvas = createCanvas(img.width, img.height);
+  const ctx = canvas.getContext('2d');
+
+  ctx.drawImage(img, 0, 0);
+  const imageData = ctx.getImageData(0, 0, img.width, img.height);
+  const data = imageData.data;
+
+  let slices = [];
+  let start = null;
+
+  for (let x = 0; x < img.width; x++) {
+    const hasPixel = columnHasPixel(data, img.width, img.height, x);
+
+    if (hasPixel && start === null) {
+      start = x;
+    }
+
+    if (!hasPixel && start !== null) {
+      slices.push({ x: start, w: x - start });
+      start = null;
+    }
+  }
+
+  if (start !== null) {
+    slices.push({ x: start, w: img.width - start });
+  }
+
+  slices.forEach((slice, i) => {
+    const charCanvas = createCanvas(slice.w, img.height);
+    const charCtx = charCanvas.getContext('2d');
+
+    charCtx.drawImage(
+      canvas,
+      slice.x,
+      0,
+      slice.w,
+      img.height,
+      0,
+      0,
+      slice.w,
+      img.height
+    );
+
+    fs.writeFileSync(
+      `${OUTPUT_DIR}/char_${i}.png`,
+      charCanvas.toBuffer('image/png')
+    );
+  });
+
+  console.log(`Extracted ${slices.length} characters`);
+}
+
+autoSlice();

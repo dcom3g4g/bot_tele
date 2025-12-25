@@ -1,0 +1,9 @@
+{
+	"id": "ub7DlAmH5lvvvZH",
+	"json": "{\"id\":\"ub7DlAmH5lvvvZH\",\"url\":\"https://finance.vietstock.vn/DGC-ctcp-tap-doan-hoa-chat-duc-giang.htm\",\"loadedUrl\":\"https://finance.vietstock.vn/DGC-ctcp-tap-doan-hoa-chat-duc-giang.htm\",\"uniqueKey\":\"DGC-1766629478944\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"stock\":{\"code\":\"DGC\",\"url\":\"https://finance.vietstock.vn/DGC-ctcp-tap-doan-hoa-chat-duc-giang.htm\",\"basePrice\":65800,\"volume\":200},\"__crawlee\":{\"state\":4}},\"handledAt\":\"2025-12-25T02:24:39.506Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "DGC-1766629478944",
+	"url": "https://finance.vietstock.vn/DGC-ctcp-tap-doan-hoa-chat-duc-giang.htm"
+}
